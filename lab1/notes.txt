@@ -1,0 +1,9 @@
+curl -i https://www.hltv.org/
+
+https://eportal.pwr.edu.pl/
+
+https://www.google.com/search?q=mama
+
+https://httpbin.org/forms/post
+
+https://validator.w3.org/#validate_by_upload
