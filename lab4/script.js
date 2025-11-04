@@ -1,10 +1,8 @@
-// Pobierz wszystkie elementy <canvas> z klasą drawingX
 const canvases = document.querySelectorAll(".drawingX");
 
 canvases.forEach((canvas) => {
   const ctx = canvas.getContext("2d");
 
-  // 🔹 Reakcja na ruch myszki
   canvas.addEventListener("mousemove", (event) => {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -28,7 +26,6 @@ canvases.forEach((canvas) => {
     ctx.stroke();
   });
 
-  // 🔹 Wyczyść po wyjściu myszką
   canvas.addEventListener("mouseleave", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   });

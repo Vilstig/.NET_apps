@@ -18,25 +18,24 @@
 
       let message = "";
       if (isNaN(size) || size < 5 || size > 20) {
-        size = 10; // domyślna wartość
+        size = 10;
         message = `Podano niepoprawną wartość — przyjęto domyślnie n = ${size}.`;
       }
 
-      // Wyświetlenie komunikatu (jeśli jest)
       if (message !== "") {
         const msgDiv = document.getElementById("message");
         msgDiv.textContent = message;
         msgDiv.style.color = "red";
         msgDiv.style.fontWeight = "bold";
       }
-      // Tworzymy tabelę
+      
       const table = document.createElement("table");
-      table.border = "1"; // prosta ramka
+      table.border = "1"; 
       const aux = [];
       for (let i = 1; i < 100; i++) {
         aux.push(i);
       }
-      aux.sort(() => Math.random() - 0.5); // losowe mieszanie tablicy
+      aux.sort(() => Math.random() - 0.5); 
       const numbers = aux.slice(0, size);
 
       for (let i = -1; i < size; i++) {
@@ -55,13 +54,21 @@
             if (val % 2 === 0) cell.classList.add("even");
             else cell.classList.add("odd");
           }
-
+        
           row.appendChild(cell);
         }
+        row.onclick = function () {
+          const cells = this.getElementsByTagName("td");
+          let sum = 0;
+          for (let k = 1; k < cells.length; k++) {
+            sum += parseInt(cells[k].textContent);
+          }
+          alert("Suma elementów wiersza: " + sum);
+        };
         table.appendChild(row);
       }
 
-      // Dodajemy tabelę do kontenera
+      
       document.getElementById("table-container").appendChild(table);
     </script>
   </body>
