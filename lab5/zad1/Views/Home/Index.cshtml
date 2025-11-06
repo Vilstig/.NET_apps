@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Tabliczka mnożenia wygenerowana przez JavaScript</h2>
+<div id="message"></div>
+<div id="table-container"></div>
+
+<script>
+    var size = window.prompt(
+        "Enter number of rows for the multiplication table (5-20)",
+        10
+    );
+
+    let message = "";
+    if (isNaN(size) || size < 5 || size > 20) {
+        size = 10;
+        message = `Podano niepoprawną wartość — przyjęto domyślnie n = ${size}.`;
+    }
+
+    if (message !== "") {
+        const msgDiv = document.getElementById("message");
+        msgDiv.textContent = message;
+        msgDiv.style.color = "red";
+        msgDiv.style.fontWeight = "bold";
+    }
+
+    const table = document.createElement("table");
+    table.border = "1";
+    const aux = [];
+    for (let i = 1; i < 100; i++) {
+        aux.push(i);
+    }
+    aux.sort(() => Math.random() - 0.5);
+    const numbers = aux.slice(0, size);
+
+    for (let i = -1; i < size; i++) {
+        const row = document.createElement("tr");
+        for (let j = -1; j < size; j++) {
+            const cell = document.createElement(
+                i === -1 || j === -1 ? "th" : "td"
+            );
+
+            if (i === -1 && j === -1) cell.textContent = "";
+            else if (i === -1) cell.textContent = numbers[j];
+            else if (j === -1) cell.textContent = numbers[i];
+            else {
+                const val = numbers[i] * numbers[j];
+                cell.textContent = val;
+                if (val % 2 === 0) cell.classList.add("even");
+                else cell.classList.add("odd");
+            }
+
+            row.appendChild(cell);
+        }
+        row.onclick = function () {
+            const cells = this.getElementsByTagName("td");
+            let sum = 0;
+            for (let k = 1; k < cells.length; k++) {
+                sum += parseInt(cells[k].textContent);
+            }
+            alert("Suma elementów wiersza: " + sum);
+        };
+        table.appendChild(row);
+    }
+
+
+    document.getElementById("table-container").appendChild(table);
+</script>

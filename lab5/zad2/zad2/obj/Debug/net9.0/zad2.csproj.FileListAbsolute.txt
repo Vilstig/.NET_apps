@@ -1,0 +1,15 @@
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\bin\Debug\net9.0\zad2.exe
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\bin\Debug\net9.0\zad2.deps.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\bin\Debug\net9.0\zad2.runtimeconfig.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\bin\Debug\net9.0\zad2.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\bin\Debug\net9.0\zad2.pdb
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.AssemblyInfoInputs.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.AssemblyInfo.cs
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.sourcelink.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\refint\zad2.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.pdb
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\zad2.genruntimeconfig.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab5\zad2\zad2\obj\Debug\net9.0\ref\zad2.dll
