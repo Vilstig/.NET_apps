@@ -1,0 +1,15 @@
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\bin\Debug\net9.0\zad56.exe
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\bin\Debug\net9.0\zad56.deps.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\bin\Debug\net9.0\zad56.runtimeconfig.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\bin\Debug\net9.0\zad56.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\bin\Debug\net9.0\zad56.pdb
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.AssemblyInfoInputs.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.AssemblyInfo.cs
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.csproj.CoreCompileInputs.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.sourcelink.json
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\refint\zad56.dll
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.pdb
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\zad56.genruntimeconfig.cache
+C:\Users\Filip\Documents\net apps\.net-applications\lab6\zad56\obj\Debug\net9.0\ref\zad56.dll
