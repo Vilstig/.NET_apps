@@ -1,1 +1,11 @@
 Lab1/screenshots/
+
+bin/
+obj/
+out/
+Debug/
+Release/
+x64/
+x86/
+
+.vscode/
