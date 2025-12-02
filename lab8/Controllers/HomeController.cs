@@ -6,13 +6,15 @@ namespace lab8.Controllers;
 
 public class GameController : Controller
 {
+    static int MinValue = Int32.MinValue;
     static int MaxValue = -1;
     static int RandValue = -1;
     static int NumOfGuesses = 0;
-    public IActionResult Set(int maxValue)
+    public IActionResult Set(int minValue, int maxValue)
     {
+        MinValue = minValue;
         MaxValue = maxValue;
-        ViewBag.Message = $"Range has been set to 0 … {MaxValue - 1}";
+        ViewBag.Message = $"Range has been set to {MinValue} … {MaxValue - 1}";
         ViewBag.cssClass = "set";
         return View("Result");
     }
@@ -27,7 +29,7 @@ public class GameController : Controller
         }
 
         Random rand = new Random();
-        RandValue = rand.Next(0, MaxValue);  // 0 to MaxValue-1
+        RandValue = rand.Next(MinValue, MaxValue);  // MinValue to MaxValue-1
 
         NumOfGuesses = 0;
 
@@ -55,9 +57,9 @@ public class GameController : Controller
 
         NumOfGuesses++;
 
-        if (userValue < 0 || userValue >= MaxValue)
+        if (userValue < MinValue || userValue >= MaxValue)
         {
-            ViewBag.Message = $"Enter a number between 0 and {MaxValue - 1}.";
+            ViewBag.Message = $"Enter a number between {MinValue} and {MaxValue - 1}.";
             ViewBag.cssClass = "error";
         }
         else if (userValue < RandValue)

@@ -27,7 +27,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "set",
-    pattern: "Set,{maxValue}",
+    pattern: "Set,{minValue},{maxValue}",
     defaults: new {controller = "Game", action = "Set" });
 
 app.MapControllerRoute(
