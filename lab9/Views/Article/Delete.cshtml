@@ -1,0 +1,33 @@
+@model lab9.Models.Article
+
+@{
+    ViewData["Title"] = "Delete Article";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Name)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Name)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Price)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Price)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.ExpirationDate)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.ExpirationDate)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Category)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Category)</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

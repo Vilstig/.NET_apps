@@ -1,0 +1,40 @@
+@model lab9.Models.Article
+
+@{
+    ViewData["Title"] = "Edit Article";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        <input asp-for="Name" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Price)
+        <input asp-for="Price" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExpirationDate)
+        <input asp-for="ExpirationDate" class="form-control" type="date" />
+        @Html.ValidationMessageFor(m => m.ExpirationDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category)
+        <select asp-for="Category" class="form-control"
+                asp-items="Html.GetEnumSelectList<lab9.Models.ArticleCategory>()">
+        </select>
+        @Html.ValidationMessageFor(m => m.Category)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
