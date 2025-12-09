@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<lab9.Data.IArticlesContext, lab9.Data.DictionaryArticlesContext>();
+builder.Services.AddSingleton<lab9.Data.IArticlesContext, lab9.Data.ListArticlesContext>();
 
 var app = builder.Build();
 

@@ -37,3 +37,18 @@
 }
     </tbody>
 </table>
+
+@section ExtraInfo {
+    <div class="alert alert-info mt-3">
+        Additional info:
+        @{
+            decimal sum = 0M;
+        }
+        @foreach (var article in Model)
+        {
+            sum = decimal.Add(sum, article.Price);
+        }
+        Total Price of Articles: @sum
+
+    </div>
+}
