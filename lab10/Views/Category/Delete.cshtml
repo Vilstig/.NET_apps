@@ -1,0 +1,35 @@
+@model lab10.Models.Category
+
+@{
+    ViewData["Title"] = "Usuń Kategorię";
+}
+
+<h1>Usuń Kategorię</h1>
+
+@if (ViewBag.DeleteError != null)
+{
+    <div class="alert alert-danger">
+        <strong>Błąd:</strong> @ViewBag.DeleteError
+    </div>
+    
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+    </div>
+}
+else
+{
+    <h3>Czy na pewno chcesz usunąć tę kategorię?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+        </dl>
+        
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" /> 
+            <input type="submit" value="Usuń" class="btn btn-danger" /> |
+            <a asp-action="Index">Powrót do listy</a>
+        </form>
+    </div>
+}
