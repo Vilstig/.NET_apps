@@ -1,4 +1,4 @@
-using lab10.Data; // Zmień na przestrzeń nazw Twojego DbContext
+using lab10.Data; 
 using lab10.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

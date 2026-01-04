@@ -1,0 +1,36 @@
+@page
+@model zad2.Pages.Categories.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń Kategorię";
+}
+
+<h1>Usuń Kategorię</h1>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        <strong>Błąd:</strong> @Model.ErrorMessage
+    </div>
+    
+    <div class="mt-3">
+        <a asp-page="./Index" class="btn btn-secondary">Powrót do listy</a>
+    </div>
+}
+else
+{
+    <h3>Czy na pewno chcesz usunąć tę kategorię?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Category.Name)</dt>
+            <dd class="col-sm-10">@Html.DisplayFor(model => model.Category.Name)</dd>
+        </dl>
+        
+        <form method="post">
+            <input type="hidden" asp-for="Category.Id" /> 
+            <input type="submit" value="Usuń" class="btn btn-danger" /> |
+            <a asp-page="./Index">Powrót do listy</a>
+        </form>
+    </div>
+}

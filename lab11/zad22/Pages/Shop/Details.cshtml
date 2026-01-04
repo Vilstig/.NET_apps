@@ -1,0 +1,44 @@
+@page
+@model zad2.Pages.Shop.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegóły Towaru";
+}
+
+<h1>Szczegóły Towaru</h1>
+
+<div class="row">
+    <div class="col-md-5">
+        @{
+            var imagePath = !string.IsNullOrEmpty(Model.Article.ImageUrl) 
+                            ? Model.Article.ImageUrl 
+                            : "/images/no_image.png";
+        }
+        <img src="@imagePath" alt="@Model.Article.Name" style="max-width: 100%; height: auto;" class="img-thumbnail mb-3" />
+    </div>
+
+    <div class="col-md-7">
+        <h3>@Model.Article.Name</h3>
+        <hr />
+        
+        <h2>
+            <span class="badge bg-success">@Model.Article.Price zł</span>
+        </h2>
+        
+        <dl class="row mt-4">
+            <dt class="col-sm-3">Kategoria:</dt>
+            <dd class="col-sm-9">
+                @(Model.Article.Category != null ? Model.Article.Category.Name : "Brak kategorii")
+            </dd>
+
+            <dt class="col-sm-3">ID Towaru:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Article.Id)</dd>
+        </dl>
+        
+        <a href="#" class="btn btn-lg btn-primary disabled mt-4" aria-disabled="true">Dodaj do koszyka (W przyszłości)</a>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-page="./Index" class="btn btn-secondary">Powrót do listy towarów</a>
+</div>

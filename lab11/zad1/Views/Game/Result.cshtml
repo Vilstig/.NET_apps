@@ -1,0 +1,82 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Game Result</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+
+        .set {
+            color: darkorange;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .draw {
+            color: green;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .low {
+            color: blue;
+            font-size: 24px;
+        }
+
+        .high {
+            color: rgb(233, 7, 233);
+            font-size: 24px;
+        }
+
+        .correct {
+            color: darkgreen;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .back-links {
+            margin-top: 40px;
+            font-size: 20px;
+        }
+
+        .back-links a {
+            text-decoration: none;
+            margin: 0 10px;
+            color: #333;
+        }
+
+        .back-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="@ViewBag.cssClass">
+        @ViewBag.Message
+    </div>
+
+    <div class="back-links">
+        <a href="/Set,30">Set Range</a> |
+        <a href="/Draw">Draw Number</a> |
+        <a href="/Guess,10">Guess Example</a>
+    </div>
+
+</body>
+</html>

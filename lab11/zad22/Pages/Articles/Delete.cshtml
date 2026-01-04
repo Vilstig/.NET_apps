@@ -1,0 +1,31 @@
+@page
+@model zad2.Pages.Articles.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń Towar";
+}
+
+<h1>Usuń Towar</h1>
+
+<h3>Czy na pewno chcesz usunąć ten towar?</h3>
+<div>
+    <h4>@Model.Article.Name</h4>
+    <hr />
+
+    <img src="@Model.Article.ImageUrl" alt="@Model.Article.Name" style="max-width: 300px; height: auto;" class="img-thumbnail mb-3" />
+
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Article.Name)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Article.Name)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Article.CategoryId)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Article.Category.Name)</dd>
+        
+        </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Article.Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Powrót do listy</a>
+    </form>
+</div>

@@ -1,0 +1,68 @@
+@page
+@model zad2.Pages.Shop.IndexModel
+
+@{
+    ViewData["Title"] = "Sklep";
+}
+
+<h1>Sklep</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Kategorie</h3>
+        <div class="list-group">
+            <a asp-page="./Index" asp-route-categoryId="" 
+               class="list-group-item list-group-item-action @(Model.CurrentCategoryId == null ? "active" : "")">
+                Wszystkie towary
+            </a>
+            
+            @foreach (var category in Model.Categories)
+            {
+                <a asp-page="./Index" 
+                   asp-route-categoryId="@category.Id" 
+                   class="list-group-item list-group-item-action @(Model.CurrentCategoryId == category.Id ? "active" : "")">
+                    @category.Name
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        @if (Model.Articles.Any())
+        {
+            <div class="row">
+                @foreach (var item in Model.Articles)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            @{
+                                var imagePath = !string.IsNullOrEmpty(item.ImageUrl) 
+                                                ? item.ImageUrl 
+                                                : "/images/no_image.png";
+                            }
+                            <a asp-page="./Details" asp-route-id="@item.Id">
+                                <img class="card-img-top" src="@imagePath" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a asp-page="./Details" asp-route-id="@item.Id" style="text-decoration: none; color: inherit;">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
+                                </h4>
+                                <h5>@item.Price zł</h5>
+                                <p class="card-text">Kategoria: @item.Category.Name</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="btn btn-success btn-sm disabled" aria-disabled="true">Dodaj do koszyka</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">Brak towarów w wybranej kategorii.</div>
+        }
+    </div>
+</div>

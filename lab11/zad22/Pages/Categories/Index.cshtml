@@ -1,0 +1,37 @@
+@page
+@model zad2.Pages.Categories.IndexModel
+
+@{
+    ViewData["Title"] = "Zarządzanie Kategoriami";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="./Create" class="btn btn-primary">Dodaj nową kategorię</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Category)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
