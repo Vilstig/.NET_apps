@@ -42,13 +42,19 @@
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration: none; color: inherit;">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </a>
                                 </h4>
                                 <h5>@item.Price zł</h5>
                                 <p class="card-text">Kategoria: @item.Category.Name</p>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-success btn-sm disabled" aria-disabled="true">Dodaj do koszyka</a>
+                                <a asp-action="AddToCart" 
+                                   asp-route-id="@item.Id" 
+                                   class="btn btn-success">
+                                    Dodaj do koszyka
+                                </a>
                             </div>
                         </div>
                     </div>
