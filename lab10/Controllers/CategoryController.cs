@@ -2,7 +2,9 @@ using lab10.Data;
 using lab10.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Policy = "Admin")]
 public class CategoryController : Controller
 {
     private readonly ApplicationDbContext _context;

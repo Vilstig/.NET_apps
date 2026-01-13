@@ -1,0 +1,28 @@
+@model lab10.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Dziękujemy!";
+}
+
+<div class="text-center mt-5">
+    
+    <h1 class="display-4 text-success">Dziękujemy za zamówienie!</h1>
+    <p class="lead">Twoje zamówienie zostało przyjęte do realizacji.</p>
+    <hr class="my-4">
+    
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            Szczegóły zamówienia
+        </div>
+        <div class="card-body text-start">
+            <p><strong>Odbiorca:</strong> @Model.FirstName @Model.LastName</p>
+            <p><strong>Adres:</strong> @Model.Address, @Model.City</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Wybrana płatność:</strong> @Model.PaymentMethod</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Shop" asp-action="Index" class="btn btn-primary">Wróć do sklepu</a>
+    </div>
+</div>

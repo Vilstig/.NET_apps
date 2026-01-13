@@ -1,0 +1,87 @@
+@model lab10.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Podsumowanie i Płatność";
+}
+
+<h2>Sfinalizuj Zamówienie</h2>
+
+<div class="row">
+    <div class="col-md-6 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Twój koszyk</span>
+            <span class="badge bg-primary rounded-pill">@Model.CartItems.Sum(i => i.Quantity)</span>
+        </h4>
+        <ul class="list-group mb-3">
+            @foreach (var item in Model.CartItems)
+            {
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">@item.Article.Name</h6>
+                        <small class="text-muted">Ilość: @item.Quantity</small>
+                    </div>
+                    <span class="text-muted">@item.TotalPrice.ToString("C")</span>
+                </li>
+            }
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Razem (PLN)</span>
+                <strong>@Model.GrandTotal.ToString("C")</strong>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-6 order-md-1">
+        <h4 class="mb-3">Dane do wysyłki</h4>
+        
+        <form asp-action="ConfirmOrder" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="col-sm-6">
+                    <label asp-for="LastName" class="form-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="jan@przyklad.pl" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Address" class="form-label">Adres</label>
+                    <input asp-for="Address" class="form-control" placeholder="ul. Kwiatowa 15" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="City" class="form-label">Miasto</label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="PaymentMethod" class="form-label">Sposób płatności</label>
+                    <select asp-for="PaymentMethod" class="form-select">
+                        <option value="">Wybierz...</option>
+                        <option value="Karta Kredytowa">Karta Kredytowa</option>
+                        <option value="BLIK">BLIK</option>
+                        <option value="Przelew Tradycyjny">Przelew Tradycyjny</option>
+                        <option value="Za pobraniem">Płatność przy odbiorze</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <button class="w-100 btn btn-success btn-lg" type="submit">Potwierdź i zapłać</button>
+        </form>
+    </div>
+</div>

@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Sklep";
+    // Zakładamy stałą ścieżkę do obrazka placeholder, jeśli nie ma go w ViewBag
+    string placeholder = ViewBag.PlaceholderImage as string ?? "/images/no_image.png";
 }
 
 <h1>Sklep</h1>
@@ -27,15 +29,15 @@
     </div>
 
     <div class="col-md-9">
-        @if (Model.Any())
-        {
-            <div class="row">
+        <div class="row" id="articles-container">
+            @if (Model.Any())
+            {
                 @foreach (var item in Model)
                 {
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             @{
-                                var imagePath = item.ImageUrl ?? ViewBag.PlaceholderImage;
+                                var imagePath = item.ImageUrl ?? placeholder;
                             }
                             <a asp-action="Details" asp-route-id="@item.Id">
                                 <img class="card-img-top" src="@imagePath" alt="@item.Name" style="height: 200px; object-fit: cover;">
@@ -46,8 +48,8 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </a>
                                 </h4>
-                                <h5>@item.Price zł</h5>
-                                <p class="card-text">Kategoria: @item.Category.Name</p>
+                                <h5>@item.Price.ToString("F2") zł</h5>
+                                <p class="card-text">Kategoria: @(item.Category?.Name ?? "Brak")</p>
                             </div>
                             <div class="card-footer">
                                 <a asp-action="AddToCart" 
@@ -59,11 +61,142 @@
                         </div>
                     </div>
                 }
+            }
+            else
+            {
+                <div class="alert alert-info" id="no-products-alert">Brak towarów w wybranej kategorii.</div>
+            }
+        </div>
+
+        <div id="loading-area" class="text-center my-4" style="min-height: 50px;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-        }
-        else
-        {
-            <div class="alert alert-info">Brak towarów w wybranej kategorii.</div>
-        }
+        </div>
+
+        <input type="hidden" id="currentCategoryId" value="@ViewBag.CurrentCategoryId" />
+        <input type="hidden" id="placeholderPath" value="@placeholder" />
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Konfiguracja
+            let skip = @Model.Count(); // Zaczynamy od tylu, ile serwer wyrenderował na start (np. 4)
+            const take = 4;            // Pobieraj po 4 kolejne
+            let isLoading = false;     
+            let allLoaded = false;     
+
+            const container = document.getElementById('articles-container');
+            const loadingArea = document.getElementById('loading-area');
+            const categoryId = document.getElementById('currentCategoryId').value;
+            const placeholder = document.getElementById('placeholderPath').value;
+
+            // Funkcja pobierająca dane z API
+            const loadMoreArticles = () => {
+                if (isLoading || allLoaded) return;
+                isLoading = true;
+
+                // Budowanie URL
+                let url = `/api/article?skip=${skip}&take=${take}`;
+                if (categoryId) {
+                    url += `&categoryId=${categoryId}`;
+                }
+
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) throw new Error("Błąd sieci");
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Jeśli API zwróciło pustą listę, to koniec danych
+                        if (data.length === 0) {
+                            allLoaded = true;
+                            loadingArea.innerHTML = '<p class="text-muted">To już wszystkie produkty.</p>';
+                            return;
+                        }
+
+                        // Generowanie HTML dla każdego produktu
+                        data.forEach(article => {
+                            const imgSrc = article.imageUrl ? article.imageUrl : placeholder;
+                            // Formatowanie ceny (proste)
+                            const priceFormatted = parseFloat(article.price).toFixed(2) + ' zł';
+                            const categoryName = article.category ? article.category.name : 'Inne';
+
+                            // Budowa HTML (identyczna struktura jak w C#)
+                            const html = `
+                                <div class="col-lg-4 col-md-6 mb-4 fade-in-item">
+                                    <div class="card h-100">
+                                        <a href="/Shop/Details/${article.id}">
+                                            <img class="card-img-top" src="${imgSrc}" alt="${article.name}" style="height: 200px; object-fit: cover;">
+                                        </a>
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <a href="/Shop/Details/${article.id}" style="text-decoration: none; color: inherit;">
+                                                    ${article.name}
+                                                </a>
+                                            </h4>
+                                            <h5>${priceFormatted}</h5>
+                                            <p class="card-text">Kategoria: ${categoryName}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="/Shop/AddToCart/${article.id}" class="btn btn-success">
+                                                Dodaj do koszyka
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            // Dodanie do kontenera
+                            container.insertAdjacentHTML('beforeend', html);
+                        });
+
+                        // Aktualizacja licznika
+                        skip += data.length;
+
+                        // Jeśli pobrało mniej niż 'take', to znaczy że to była ostatnia partia
+                        if (data.length < take) {
+                            allLoaded = true;
+                            loadingArea.innerHTML = '<p class="text-muted">To już wszystkie produkty.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Błąd:', error);
+                        loadingArea.innerHTML = '<p class="text-danger">Wystąpił błąd podczas ładowania.</p>';
+                    })
+                    .finally(() => {
+                        isLoading = false;
+                    });
+            };
+
+            // Intersection Observer - wykrywa czy użytkownik widzi "loadingArea"
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMoreArticles();
+                }
+            }, {
+                root: null,      // viewport
+                rootMargin: '100px', // zacznij ładować 100px zanim dojedziemy do końca
+                threshold: 0.1
+            });
+
+            // Start obserwowania
+            if (loadingArea) {
+                observer.observe(loadingArea);
+            }
+        });
+    </script>
+    
+    <style>
+        /* Opcjonalna animacja pojawiania się nowych elementów */
+        .fade-in-item {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+}

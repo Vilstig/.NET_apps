@@ -1,6 +1,7 @@
 // Article.cs
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema; // Wymagane dla [NotMapped]
+using System.ComponentModel.DataAnnotations.Schema; 
+using System.Text.Json.Serialization;
 
 namespace lab10.Models
 {
@@ -21,10 +22,12 @@ namespace lab10.Models
 
         [Required(ErrorMessage = "Wybór kategorii jest obowiązkowy.")]
         public int CategoryId { get; set; }
-
-        public Category Category { get; set; } = default!;
+       
+        [JsonIgnore]
+        public Category? Category { get; set; } = default!;
 
         [NotMapped]
+        [JsonIgnore]
         public IFormFile? ImageFile { get; set; }
     }
 }
