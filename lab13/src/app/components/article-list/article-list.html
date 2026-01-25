@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<h2>Lista Artykułów</h2>
+<button (click)="createNew.emit()">Dodaj nowy artykuł</button>
+
+<ul>
+  @for (article of articles(); track article.id) {
+    <li>
+      <div class="info">
+        <strong>{{ article.name }}</strong> 
+        <span class="badge">({{ article.category }})</span>
+      </div>
+      <button (click)="remove.emit(article.id)">Usuń</button>
+    </li>
+  } @empty {
+    <li>Brak artykułów w sklepie.</li>
+  }
+</ul>

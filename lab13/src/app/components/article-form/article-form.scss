@@ -1,0 +1,28 @@
+.form-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  max-width: 400px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, textarea, select {
+  width: 100%;
+  display: block;
+  margin-top: 5px;
+}
+
+.placeholder {
+  text-align: center;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}

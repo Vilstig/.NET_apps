@@ -1,0 +1,17 @@
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+
+.badge {
+  color: gray;
+  margin-left: 10px;
+  font-size: 0.9em;
+}
+
+button {
+  cursor: pointer;
+}

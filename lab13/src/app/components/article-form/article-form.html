@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<div class="form-container">
+  <h3>Dodaj nowy artykuł</h3>
+  
+  <div class="placeholder">
+    <img src="https://placehold.co/100x100?text=No+Image" alt="Placeholder">
+    <p>Brak możliwości dodania zdjęcia</p>
+  </div>
+
+  <label>Nazwa: <input [(ngModel)]="newArticle.name" placeholder="Nazwa"></label>
+  <label>Cena: <input type="number" [(ngModel)]="newArticle.price"></label>
+  
+  <label>Kategoria:
+    <select [(ngModel)]="newArticle.category">
+      @for (cat of categories(); track $index) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
+  </label>
+
+  <div class="actions">
+    <button (click)="onSave()">Zapisz</button>
+    <button (click)="cancel.emit()">Anuluj</button>
+  </div>
+</div>
