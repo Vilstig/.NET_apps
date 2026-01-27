@@ -4,11 +4,12 @@ import { ArticleService } from './services/article.service';
 import { Article, ArticleCategory } from './models/article.model';
 import { ArticleList } from './components/article-list/article-list';
 import { ArticleForm } from './components/article-form/article-form';
+import { FooterComponent } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ArticleList, ArticleForm],
+  imports: [CommonModule, ArticleList, ArticleForm, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
