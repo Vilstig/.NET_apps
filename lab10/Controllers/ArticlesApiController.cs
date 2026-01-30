@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using lab10.Data;
 using lab10.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace lab10.Controllers
 {
+    [EnableCors("AllowAll")]
     [Route("api/article")] // Adres będzie: /api/article
     [ApiController]
     public class ArticlesApiController : ControllerBase

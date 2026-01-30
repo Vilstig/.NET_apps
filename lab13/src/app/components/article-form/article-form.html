@@ -1,25 +1,30 @@
-<!DOCTYPE html>
 <div class="form-container">
-  <h3>Dodaj nowy artykuł</h3>
-  
-  <div class="placeholder">
-    <img src="https://placehold.co/100x100?text=No+Image" alt="Placeholder">
-    <p>Brak możliwości dodania zdjęcia</p>
-  </div>
+  <h3>{{ isEditMode() ? 'Edytuj Artykuł' : 'Nowy Artykuł' }}</h3>
 
-  <label>Nazwa: <input [(ngModel)]="newArticle.name" placeholder="Nazwa"></label>
-  <label>Cena: <input type="number" [(ngModel)]="newArticle.price"></label>
+  <label>Nazwa: 
+    <input [(ngModel)]="newArticle.name" placeholder="Nazwa produktu">
+  </label>
   
+  <label>Cena: 
+    <input type="number" [(ngModel)]="newArticle.price">
+  </label>
+
   <label>Kategoria:
-    <select [(ngModel)]="newArticle.category">
-      @for (cat of categories(); track $index) {
-        <option [value]="cat">{{ cat }}</option>
+    <select [(ngModel)]="newArticle.categoryId">
+      <option [ngValue]="null" disabled>-- Wybierz kategorię --</option>
+      
+      @for (cat of categories(); track cat.id) {
+        <option [ngValue]="cat.id">{{ cat.name }}</option>
       }
     </select>
   </label>
 
+  @if (!newArticle.categoryId) {
+    <p style="color: red; font-size: 12px;">Wybierz kategorię!</p>
+  }
+
   <div class="actions">
-    <button (click)="onSave()">Zapisz</button>
-    <button (click)="cancel.emit()">Anuluj</button>
+    <button (click)="onSave()" [disabled]="!newArticle.name || !newArticle.categoryId">Zapisz</button>
+    <button (click)="goBack()">Anuluj</button>
   </div>
-</div>
+</div> 

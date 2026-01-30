@@ -1,17 +1,39 @@
-<!DOCTYPE html>
-<h2>Lista Artykułów</h2>
-<button (click)="createNew.emit()">Dodaj nowy artykuł</button>
+<div class="list-container">
+  
+  <div class="list-header">
+    <h2>Lista Artykułów</h2>
+    <button class="btn-add" (click)="onAdd()">+ Dodaj Nowy</button>
+  </div>
 
-<ul>
-  @for (article of articles(); track article.id) {
-    <li>
-      <div class="info">
-        <strong>{{ article.name }}</strong> 
-        <span class="badge">({{ article.category }})</span>
+  <ul class="article-list">
+    @for (article of articles(); track article.id) {
+      <li class="article-item" (click)="goToDetails(article.id)">
+        
+        <div class="img-wrapper">
+        @if (article.imageUrl) {
+          <img [src]="fileUrl + article.imageUrl" [alt]="article.name" />
+        } @else {
+          <div class="no-image">Brak zdjęcia</div>
+        }
       </div>
-      <button (click)="remove.emit(article.id)">Usuń</button>
-    </li>
-  } @empty {
-    <li>Brak artykułów w sklepie.</li>
-  }
-</ul>
+
+        <div class="info">
+          <h3 class="article-name">{{ article.name }}</h3>
+          <span class="article-price">{{ article.price }} PLN</span>
+        </div>
+
+        <div class="actions">
+        <button (click)="onEdit(article.id); $event.stopPropagation()">Edytuj</button>
+        <button (click)="onDelete(article.id); $event.stopPropagation()" class="btn-delete">
+          Usuń
+        </button>
+      </div>
+
+      </li>
+    }
+    
+    @if (articles().length === 0) {
+      <p class="empty-state">Brak artykułów w sklepie.</p>
+    }
+  </ul>
+</div>

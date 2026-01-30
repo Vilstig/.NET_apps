@@ -1,36 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Article, ArticleCategory } from '../models/article.model';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'; // Dodaj HttpParams
+import { Observable } from 'rxjs';
+import { Article } from '../models/article.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ArticleService {
-  categories: ArticleCategory[] = ['Technology', 'Health', 'Finance', 'Education', 'Entertainment', 'Food'];
-  
-  articles: Article[] = [
-    { id: 1, name: 'Mleko', price: 3.50, image: null, category: 'Food' },
-    { id: 2, name: 'Szampon', price: 15.99, image: null, category: 'Health' },
-    { id: 3, name: 'Słuchawki', price: 150.00, image: null, category: 'Technology' }];
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:5172/api/article'; 
 
-    constructor() { }
 
-    getArticles(): Article[] {
-      return this.articles;
+  getArticles(skip: number = 0, take: number = 100, categoryId?: number): Observable<Article[]> {
+    let params = new HttpParams()
+      .set('skip', skip)
+      .set('take', take);
+
+    if (categoryId) {
+      params = params.set('categoryId', categoryId);
     }
 
-    getCategories(): ArticleCategory[] {
-      return this.categories;
-    }
+    return this.http.get<Article[]>(this.apiUrl, { params });
+  }
 
-    addArticle(article: Article): void {
-      this.articles.push(article);
-    }
+  getArticle(id: number): Observable<Article> {
+    return this.http.get<Article>(`${this.apiUrl}/${id}`);
+  }
 
-    getArticleById(id: number): Article | undefined {
-      return this.articles.find(article => article.id === id);
-    }
+  addArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.apiUrl, article);
+  }
 
-    deleteArticle(id: number): void {
-      this.articles = this.articles.filter(a => a.id !== id);
-    }
+  updateArticle(id: number, article: Article): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, article);
+  }
+
+  deleteArticle(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

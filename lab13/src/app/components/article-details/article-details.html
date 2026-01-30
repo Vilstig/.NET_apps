@@ -1,0 +1,12 @@
+<div *ngIf="article() as a" class="details-box">
+  <div *ngIf="a.imageUrl" style="margin-bottom: 15px">
+    <img
+      [src]="fileUrl + a.imageUrl"
+      [alt]="a.name"
+      style="max-width: 100%; max-height: 300px; border-radius: 8px"
+    />
+  </div>
+
+  <h3>Szczegóły: {{ a.name }}</h3>
+  <p><strong>Cena:</strong> {{ a.price }} PLN</p>
+</div>

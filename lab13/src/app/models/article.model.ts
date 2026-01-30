@@ -1,9 +1,10 @@
-export type ArticleCategory = 'Technology' | 'Health' | 'Finance' | 'Education' | 'Entertainment' | 'Food';
+import { Category } from "./category.model";
 
 export interface Article {
-    id: number;
-    name: string;
-    price: number;
-    image?: string | null;
-    category: ArticleCategory;
+  id: number;
+  name: string;
+  price: number;
+  imageUrl?: string; 
+  
+  categoryId: number;
 }

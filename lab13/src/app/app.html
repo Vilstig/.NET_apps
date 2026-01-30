@@ -1,22 +1,14 @@
-<!DOCTYPE html>
 <div class="container">
-  <h1>Sklep Angular</h1>
+  <nav>
+    <ul>
+      <li><a routerLink="/articles" routerLinkActive="active-link">Artykuły</a></li>
+      <li><a routerLink="/categories" routerLinkActive="active-link">Kategorie</a></li>
+    </ul>
+  </nav>
 
-  @if (!isFormVisible) {
-    <app-article-list
-      [articles]="articles" 
-      (createNew)="showForm()"
-      (remove)="handleRemove($event)"
-    ></app-article-list>
-  }
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 
-  @if (isFormVisible) {
-    <app-article-form
-      [categories]="categories"
-      (save)="handleSave($event)"
-      (cancel)="hideForm()"
-    ></app-article-form>
-  }
+  <app-footer></app-footer>
 </div>
-
-<app-footer> </app-footer>
